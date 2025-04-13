@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Categorization</title>
+    
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        .advanced {
+            background-color: #d4edda;
+        }
+        .slow {
+            background-color: #f8d7da;
+        }
+    </style>
+    
+</head>
+<body>
+    <!--img src="jspmrscoe.png" alt="JSPM RSCOE" /-->
+    <h1>Marksheet Categorization</h1>
+    <label for="threshold">Enter Advanced Learner Threshold Marks: </label>
+    <input type="number" id="threshold" >
+    <button onclick="categorize()">Categorize</button>
+
+    <table id="marksheet">
+        <thead>
+            <tr>
+                <th>Student Name</th>
+                <th>Marks</th>
+                <th>Category</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Sunil</td>
+                <td>85</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>Ravi</td>
+                <td>65</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>Sanika</td>
+                <td>90</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>Vaishnav</td>
+                <td>55</td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <script>
+        function categorize() {
+            const threshold = document.getElementById('threshold').value;
+            if (threshold === '') {
+                alert("Please enter a threshold value.");
+                return;
+            }
+
+            const rows = document.querySelectorAll("#marksheet tbody tr");
+            rows.forEach(row => {
+                const marks = parseInt(row.cells[1].innerText, 10);
+                const categoryCell = row.cells[2];
+
+                if (marks >= threshold) {
+                    categoryCell.innerText = "Advanced Learner";
+                    row.className = "advanced";
+                } else {
+                    categoryCell.innerText = "Slow Learner";
+                    row.className = "slow";
+                }
+            });
+        }
+    </script>
+     
+</body>
+</html>
+
